@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import { MainLayout } from '../components/layout/MainLayout.tsx'
 
@@ -14,7 +14,7 @@ const FavoritesPage = lazy(() => import('../pages/FavoritesPage.tsx'))
 
 export function AppRoutes() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
@@ -28,7 +28,7 @@ export function AppRoutes() {
           <Route path="favorites" element={<FavoritesPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

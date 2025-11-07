@@ -93,7 +93,7 @@ export default function HomePage() {
       <section className="relative min-h-[700px] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80"
+            src="images/hero-main.jpg"
             alt="Modern minimalist houses with blue sky"
             className="h-full w-full object-cover"
           />
@@ -321,7 +321,7 @@ export default function HomePage() {
             {statsData.map((stat) => (
               <div key={stat.label} className="rounded-2xl bg-white p-6 text-center shadow-sm">
                 <div className="mb-4 flex justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sky/30 text-3xl">
+                  <div className="flex h-16 w-16 iteSms-center justify-center rounded-full bg-sky/30 text-3xl">
                     {stat.icon}
                   </div>
                 </div>
