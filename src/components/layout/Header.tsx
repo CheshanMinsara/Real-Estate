@@ -1,5 +1,6 @@
 import { Search, Grid3x3, ChevronDown } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import Dropdown from '../common/Dropdown'
 
 export function Header() {
   return (
@@ -59,16 +60,30 @@ export function Header() {
             <Search className="h-4 w-4" />
             <span>Search Properties</span>
           </button>
-          <button className="hidden items-center gap-2 text-sm font-medium text-cream hover:text-accent md:flex">
+          <NavLink to="/agent/dashboard" className="hidden items-center gap-2 text-sm font-medium text-cream hover:text-accent md:flex">
             <Grid3x3 className="h-4 w-4" />
             <span>Dashboard</span>
-          </button>
-          <button className="flex items-center gap-2 rounded-full bg-accent px-3 py-2 text-sm font-semibold text-charcoal transition hover:bg-accent-light">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-charcoal/20 text-xs font-semibold">
-              JS
-            </div>
-            <ChevronDown className="h-4 w-4" />
-          </button>
+          </NavLink>
+
+          <Dropdown
+            align="right"
+            trigger={
+              <div className="flex items-center gap-2 rounded-full bg-accent px-3 py-2 text-sm font-semibold text-charcoal transition hover:bg-accent-light">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-charcoal/20 text-xs font-semibold">JS</div>
+                <ChevronDown className="h-4 w-4" />
+              </div>
+            }
+          >
+            <nav className="flex flex-col gap-1">
+              <NavLink to="/agent/dashboard" className="block rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                Profile
+              </NavLink>
+              <NavLink to="/favorites" className="block rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                Favorites
+              </NavLink>
+              <button className="mt-2 rounded bg-red-50 px-3 py-2 text-left text-sm text-red-600 hover:bg-red-100">Logout</button>
+            </nav>
+          </Dropdown>
         </div>
       </div>
     </header>

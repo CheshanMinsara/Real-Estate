@@ -9,6 +9,7 @@ const PropertyDetailPage = lazy(() => import('../pages/PropertyDetailPage.tsx'))
 const AboutPage = lazy(() => import('../pages/AboutPage.tsx'))
 const ContactPage = lazy(() => import('../pages/ContactPage.tsx'))
 const AgentsPage = lazy(() => import('../pages/AgentsPage.tsx'))
+const AgentDashboard = lazy(() => import('../pages/AgentDashboard.tsx'))
 const FavoritesPage = lazy(() => import('../pages/FavoritesPage.tsx'))
 
 export function AppRoutes() {
@@ -22,6 +23,8 @@ export function AppRoutes() {
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="agents" element={<AgentsPage />} />
+          <Route path="agent/:agentId/dashboard" element={<AgentDashboard />} />
+          <Route path="agent/dashboard" element={<AgentDashboard />} />
           <Route path="favorites" element={<FavoritesPage />} />
         </Route>
       </Routes>

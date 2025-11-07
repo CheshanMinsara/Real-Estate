@@ -55,8 +55,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <span>realestatemarketsl@gmail.com
-                </span>
+                <a href="mailto:realestatemarketsl@gmail.com" className="hover:text-white">realestatemarketsl@gmail.com</a>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
@@ -65,7 +64,7 @@ export function Footer() {
             </div>
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61583470680078"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/30 text-cream transition hover:border-accent hover:text-accent"
                 aria-label="Facebook"
               >

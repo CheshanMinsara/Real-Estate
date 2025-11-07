@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import { PropertyCard } from '../components/properties/PropertyCard.tsx'
+import Dropdown from '../components/common/Dropdown'
 import { toggleFavorite } from '../store/slices/favoritesSlice.ts'
 import {
   resetFilters,
@@ -27,13 +28,11 @@ export default function HomePage() {
   const favorites = useAppSelector(selectFavoriteIds)
   const featuredProperties = useAppSelector((state) => state.properties.items.slice(0, 3))
 
-  const [locationOpen, setLocationOpen] = useState(false)
-  const [typeOpen, setTypeOpen] = useState(false)
-  const [priceOpen, setPriceOpen] = useState(false)
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { isSubmitting },
   } = useForm<SearchFormValues>({
     defaultValues: {
@@ -64,6 +63,11 @@ export default function HomePage() {
     }
     navigate('/listings')
   }
+
+  // Local labels for dropdown buttons (keeps UI updated when selecting)
+  const [locationLabel, setLocationLabel] = useState('Location')
+  const [typeLabel, setTypeLabel] = useState('All Types')
+  const [priceLabel, setPriceLabel] = useState('Any Price')
 
   const statsData = useMemo(
     () => [
@@ -136,35 +140,83 @@ export default function HomePage() {
               </div>
 
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <button
-                  type="button"
-                  onClick={() => setLocationOpen(!locationOpen)}
-                  className="flex items-center justify-between rounded-xl border border-sage/30 bg-cream px-4 py-3 text-left text-sm text-charcoal hover:border-accent"
+                <Dropdown
+                  trigger={
+                    <div className="flex w-full items-center justify-between rounded-xl border border-sage/30 bg-cream px-4 py-3 text-left text-sm text-charcoal hover:border-accent">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-4 w-4" />
+                        <span>{locationLabel}</span>
+                      </div>
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
+                  }
                 >
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>Location</span>
+                  <div className="flex flex-col">
+                    {['Colombo', 'Kandy', 'Galle', 'Negombo'].map((city) => (
+                      <button
+                        type="button"
+                        key={city}
+                        onClick={() => {
+                          setValue('location', city)
+                          setLocationLabel(city)
+                        }}
+                        className="text-left px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      >
+                        {city}
+                      </button>
+                    ))}
                   </div>
-                  <ChevronDown className="h-4 w-4" />
-                </button>
+                </Dropdown>
 
-                <button
-                  type="button"
-                  onClick={() => setTypeOpen(!typeOpen)}
-                  className="flex items-center justify-between rounded-xl border border-sage/30 bg-cream px-4 py-3 text-left text-sm text-charcoal hover:border-accent"
+                <Dropdown
+                  trigger={
+                    <div className="flex w-full items-center justify-between rounded-xl border border-sage/30 bg-cream px-4 py-3 text-left text-sm text-charcoal hover:border-accent">
+                      <span>{typeLabel}</span>
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
+                  }
                 >
-                  <span>All Types</span>
-                  <ChevronDown className="h-4 w-4" />
-                </button>
+                  <div className="flex flex-col">
+                    {['All Types', 'House', 'Apartment', 'Condo'].map((t) => (
+                      <button
+                        type="button"
+                        key={t}
+                        onClick={() => {
+                          setValue('propertyType', t)
+                          setTypeLabel(t)
+                        }}
+                        className="text-left px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </Dropdown>
 
-                <button
-                  type="button"
-                  onClick={() => setPriceOpen(!priceOpen)}
-                  className="flex items-center justify-between rounded-xl border border-sage/30 bg-cream px-4 py-3 text-left text-sm text-charcoal hover:border-accent"
+                <Dropdown
+                  trigger={
+                    <div className="flex w-full items-center justify-between rounded-xl border border-sage/30 bg-cream px-4 py-3 text-left text-sm text-charcoal hover:border-accent">
+                      <span>{priceLabel}</span>
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
+                  }
                 >
-                  <span>Any Price</span>
-                  <ChevronDown className="h-4 w-4" />
-                </button>
+                  <div className="flex flex-col">
+                    {['Any Price', 'Under 50,000,000', '50,000,000 - 100,000,000', '100,000,000+'].map((p) => (
+                      <button
+                        type="button"
+                        key={p}
+                        onClick={() => {
+                          setValue('price', p)
+                          setPriceLabel(p)
+                        }}
+                        className="text-left px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                </Dropdown>
 
                 <button
                   type="button"
